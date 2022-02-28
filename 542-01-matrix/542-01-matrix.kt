@@ -9,16 +9,13 @@ class Solution {
         }
         val dp = Array(A.size) { IntArray(A[it].size) }
         while (dq.isNotEmpty()) {
-            val sz = dq.size
-            repeat(sz) {
-                val (i, j) = dq.removeFirst()
-                dirs.forEach { (dx, dy) ->
-                    val (x, y) = i + dx to j + dy
-                    if (x in A.indices && y in A[i].indices && A[x][y] == 1) {
-                        A[x][y] = 0
-                        dp[x][y] = 1 + dp[i][j]
-                        dq.add(x to y)
-                    }
+            val (i, j) = dq.removeFirst()
+            dirs.forEach { (dx, dy) ->
+                val (x, y) = i + dx to j + dy
+                if (x in A.indices && y in A[i].indices && A[x][y] == 1) {
+                    A[x][y] = 0
+                    dp[x][y] = 1 + dp[i][j]
+                    dq.add(x to y)
                 }
             }
         }
