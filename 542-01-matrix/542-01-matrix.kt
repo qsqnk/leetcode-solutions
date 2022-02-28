@@ -5,20 +5,19 @@ class Solution {
         for (i in A.indices) {
             for (j in A[i].indices) {
                 if (A[i][j] == 0) dq.add(i to j)
+                else A[i][j] = -1
             }
         }
-        val dp = Array(A.size) { IntArray(A[it].size) }
         while (dq.isNotEmpty()) {
             val (i, j) = dq.removeFirst()
             dirs.forEach { (dx, dy) ->
                 val (x, y) = i + dx to j + dy
-                if (x in A.indices && y in A[i].indices && A[x][y] == 1) {
-                    A[x][y] = 0
-                    dp[x][y] = 1 + dp[i][j]
+                if (x in A.indices && y in A[i].indices && A[x][y] == -1) {
+                    A[x][y] = 1 + A[i][j]
                     dq.add(x to y)
                 }
             }
         }
-        return dp
+        return A
     }
 }
