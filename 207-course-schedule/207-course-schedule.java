@@ -1,6 +1,6 @@
 class Solution {
-    private static int[] colors;
-    boolean hasCycle = false;
+    private int[] colors;
+    private boolean hasCycle = false;
     
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         List<List<Integer>> graph = new ArrayList<>();
@@ -11,7 +11,7 @@ class Solution {
         return !hasCycle;
     }
     
-    void checkForCycle(List<List<Integer>> graph) {
+    private void checkForCycle(List<List<Integer>> graph) {
         for (int x = 0; x < graph.size(); x++) {
             if (colors[x] == 0) {
                 dfs(x, graph);
@@ -19,7 +19,7 @@ class Solution {
         }
     }
     
-    void dfs(int x, List<List<Integer>> graph) {
+    private void dfs(int x, List<List<Integer>> graph) {
         colors[x] = 1;
         for (int y : graph.get(x)) {
             if (colors[y] == 1) {
