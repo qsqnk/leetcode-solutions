@@ -8,7 +8,7 @@ class Solution {
         HashMap<Integer, Integer> count = new HashMap<>();
         int total = 0;
         for (int i = 0; i < nums.length; i++) {
-            total += count.getOrDefault(nums[i], 0) % MODULO;
+            total += count.getOrDefault(nums[i], 0);
             total %= MODULO;
             count.merge(nums[i], 1, Integer::sum);
         }
