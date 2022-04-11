@@ -11,15 +11,11 @@
 class Solution {
     fun levelOrder(root: TreeNode?): List<List<Int>> {
         root ?: return emptyList()
-        val levels = arrayListOf<List<Int>>()
+        val levels = mutableListOf<List<Int>>()
         var level = listOf(root)
         while (level.isNotEmpty()) {
             levels.add(level.map(TreeNode::`val`)) 
-            level = level.flatMap { x -> arrayListOf<TreeNode>().apply {
-                    x.left?.let(::add)
-                    x.right?.let(::add)
-                }
-            }
+            level = level.flatMap { x -> listOf(x.left, x.right).filterNotNull() }
         }
         return levels
     }
