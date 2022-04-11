@@ -13,14 +13,13 @@ class Solution {
         root ?: return emptyList()
         val levels = arrayListOf<List<Int>>()
         var level = listOf(root)
-        val children = { x: TreeNode -> arrayListOf<TreeNode>().apply {
-                x.left?.let(::add)
-                x.right?.let(::add)
-            }
-        }
         while (level.isNotEmpty()) {
-            levels.add(level.map { it.`val` }) 
-            level = level.flatMap(children)
+            levels.add(level.map(TreeNode::`val`)) 
+            level = level.flatMap { x -> arrayListOf<TreeNode>().apply {
+                    x.left?.let(::add)
+                    x.right?.let(::add)
+                }
+            }
         }
         return levels
     }
