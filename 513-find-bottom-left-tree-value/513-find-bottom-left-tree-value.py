@@ -6,8 +6,7 @@
 #         self.right = right
 class Solution:
     def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
-        level = [root] if root else []
-        leftmost = root.val
+        level, leftmost = [root], root.val
         while level:
             leftmost = level[0].val
             level = [c for n in level for c in [n.left, n.right] if c]
