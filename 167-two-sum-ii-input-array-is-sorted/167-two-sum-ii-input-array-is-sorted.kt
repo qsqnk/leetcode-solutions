@@ -1,11 +1,7 @@
 class Solution {
-    fun twoSum(numbers: IntArray, target: Int): IntArray {
-        var (lo, hi) = 0 to numbers.lastIndex
-        while (lo < hi) {
-            if (numbers[lo] + numbers[hi] < target) lo++
-            else if (numbers[lo] + numbers[hi] > target) hi--
-            else break
-        }
-        return intArrayOf(lo + 1, hi + 1)
+    tailrec fun twoSum(A: IntArray, t: Int, l: Int = 0, r: Int = A.size - 1): IntArray = when {
+        A[l] + A[r] < t -> twoSum(A, t, l + 1, r) 
+        A[l] + A[r] > t -> twoSum(A, t, l, r - 1)
+        else -> intArrayOf(l + 1, r + 1)
     }
 }
