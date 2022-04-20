@@ -1,20 +1,14 @@
 class Solution {
     fun isBipartite(g: Array<IntArray>): Boolean {
-        val p = IntArray(g.size) { -1 }
-        var good = true
-        fun dfs(u: Int, even: Boolean) {
-            p[u] = if (even) 0 else 1
+        var (colors, good) = IntArray(g.size) { -1 } to true
+        fun dfs(u: Int, color: Int) {
+            colors[u] = color
             for (v in g[u]) {
-                if (p[v] == -1) 
-                    dfs(v, !even)
-                else if (p[u] == p[v]) 
-                    good = false
+                if (colors[v] == -1) dfs(v, color xor 1)
+                good = good && colors[u] != colors[v]
             }
         }
-        for (u in g.indices) {
-            if (p[u] == -1) 
-                dfs(u, even=true)
-        }
+        g.indices.forEach { u -> if (colors[u] == -1) dfs(u, 0) }
         return good
     }
 }
