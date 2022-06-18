@@ -10,7 +10,8 @@ class Solution:
     ) -> Optional[TreeNode]:
         if depth == 1:  
             return TreeNode(val=val, left=root) if left else TreeNode(val=val, right=root)
-        elif not root:
+        
+        if not root:
             return None
           
         root.left = self.addOneRow(root.left, val, depth - 1, left=True)
