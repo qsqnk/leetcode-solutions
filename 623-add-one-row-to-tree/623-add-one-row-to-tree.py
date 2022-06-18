@@ -9,10 +9,9 @@ class Solution:
         self, root: Optional[TreeNode], val: int, depth: int, left=True
     ) -> Optional[TreeNode]:
         if depth == 1:  
-            return TreeNode(val=val, left=root) if left else TreeNode(val=val, right=root)
+            return TreeNode(val=val, left=(None, root)[left], right=(None, root)[not left])  
         
-        if not root:
-            return None
+        if not root: return None
           
         root.left = self.addOneRow(root.left, val, depth - 1, left=True)
         root.right = self.addOneRow(root.right, val, depth - 1, left=False)
